@@ -38,8 +38,10 @@ print("Villes à moins de 35km d'Amiens \n", cities35, "\n")
 rayon = 35
 ville_dep = "Amiens"
 
+# On recherche les emplois à 35km d'Amiens
 cities_under_radius = r.georadiusbymember("Ville", ville_dep, rayon, "km")
 offres_emplois = []
+# Pour chacune de ces villes on recherche les offres emplois  disponibles
 for city in cities_under_radius:
     liste_emplois = r.lrange(city, 0, -1)
     for emp in liste_emplois:
@@ -48,6 +50,5 @@ for city in cities_under_radius:
 for emp in offres_emplois:
     print(emp)
 
-
-
+# On vide la db pour qu'à chaque run on ne sur-remplisse pas la BDD
 r.flushdb()
